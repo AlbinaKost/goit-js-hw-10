@@ -2,14 +2,12 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.form');
-const input = form.querySelector('label > input');
-let delay;
-input.addEventListener('input', e => {
-  delay = e.currentTarget.value;
-});
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+
+  // Отримання значення вводу в момент відправки форми
+  const delay = form.elements['label-input'].value;
 
   function promise(delay, state) {
     return new Promise((resolve, reject) => {
@@ -40,5 +38,6 @@ form.addEventListener('submit', e => {
         position: 'topRight',
       });
     });
+
   form.reset();
 });
