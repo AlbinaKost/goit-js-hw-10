@@ -6,8 +6,8 @@ const form = document.querySelector('.form');
 form.addEventListener('submit', e => {
   e.preventDefault();
 
-  // Отримання значення вводу в момент відправки форми
-  const delay = form.elements['label-input'].value;
+  const input = form.querySelector('label > input');
+  const delay = input.value; // Отримання значення вводу
 
   function promise(delay, state) {
     return new Promise((resolve, reject) => {
@@ -41,3 +41,6 @@ form.addEventListener('submit', e => {
 
   form.reset();
 });
+
+
+
