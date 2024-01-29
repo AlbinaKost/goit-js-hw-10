@@ -23,7 +23,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
-    if (userSelectedDate < Date.now()) {
+    if (userSelectedDate <= new Date()) {
       iziToast.show({
         message: 'Please choose a date in the future',
         messageColor: '#FFFFFF',
@@ -82,6 +82,9 @@ function timerNumber({ days, hours, minutes, seconds }) {
 function stopTimer(difference) {
   if (difference <= 0) {
     clearInterval(setIntervalId);
+    btnStart.disabled = true;
+    btnStart.style.background = '#CFCFCF';
+    btnStart.style.color = '#989898';
   }
 }
 
