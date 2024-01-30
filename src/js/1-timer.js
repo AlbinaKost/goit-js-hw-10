@@ -58,6 +58,15 @@ btnStart.addEventListener('click', () => {
   }, 1000);
 });
 
+function stopTimer() {
+  if (difference <= 0) {
+    clearInterval(setIntervalId);
+    btnStart.disabled = true;
+    btnStart.style.background = '#CFCFCF';
+    btnStart.style.color = '#989898';
+  }
+}
+
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -79,14 +88,14 @@ function timerNumber({ days, hours, minutes, seconds }) {
   second.textContent = addLeadingZero(seconds);
 }
 
-function stopTimer(difference) {
-  if (difference <= 0) {
-    clearInterval(setIntervalId);
-    btnStart.disabled = true;
-    btnStart.style.background = '#CFCFCF';
-    btnStart.style.color = '#989898';
-  }
-}
+// function stopTimer(difference) {
+//   if (difference <= 0) {
+//     clearInterval(setIntervalId);
+//     btnStart.disabled = true;
+//     btnStart.style.background = '#CFCFCF';
+//     btnStart.style.color = '#989898';
+//   }
+// }
 
 function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
