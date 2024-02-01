@@ -5,30 +5,32 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const btnStart = document.querySelector('button');
 const input = document.querySelector('input');
-const day = document.querySelector('.value[ data-days]');
-const hour = document.querySelector('.value[ data-hours]');
-const minute = document.querySelector('.value[ data-minutes]');
-const second = document.querySelector('.value[ data-seconds]');
+const day = document.querySelector('.value[data-days]');
+const hour = document.querySelector('.value[data-hours]');
+const minute = document.querySelector('.value[data-minutes]');
+const second = document.querySelector('.value[data-seconds]');
 btnStart.disabled = true;
-let date = Date.now();
 let userSelectedDate;
 let difference;
 let setIntervalId;
+
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    // console.log(selectedDates[0]);
+  onClose(selectedDates, dateStr, instance) {
     userSelectedDate = selectedDates[0];
-    if (userSelectedDate < Date.now()) {
+    if (!userSelectedDate || userSelectedDate < Date.now()) {
       iziToast.show({
-        message: 'Please choose a date in the future',
+        message: 'Please choose a valid date in the future',
         messageColor: '#FFFFFF',
         backgroundColor: '#B51B1B',
         position: 'topRight',
       });
+      btnStart.disabled = true;
+      btnStart.style.background = '#CFCFCF';
+      btnStart.style.color = '#989898';
     } else {
       btnStart.disabled = false;
       btnStart.style.background = '#4E75FF';
@@ -39,7 +41,7 @@ const options = {
 
 flatpickr('#datetime-picker', options);
 
-btnStart.addEventListener('click', e => {
+btnStart.addEventListener('click', (e) => {
   btnStart.disabled = true;
   input.disabled = true;
   btnStart.style.background = '#CFCFCF';
@@ -54,7 +56,6 @@ btnStart.addEventListener('click', e => {
 });
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
